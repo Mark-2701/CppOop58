@@ -1,1 +1,1 @@
-# CppOop58
+# Курс ООП мовою C++ група П-58 ITSTEP Academy
