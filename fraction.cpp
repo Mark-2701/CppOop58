@@ -1,5 +1,5 @@
 #include "fraction.h"
-#include <iostream>
+#include <format>
 
 int fraction_t::get_numerator() {
 	return numerator;
@@ -11,6 +11,8 @@ int fraction_t::get_denominator() {
 
 void fraction_t::set_numerator(int numerator) {
 	this->numerator = numerator;
+	/* this - покажчик на об'єкт, неявний параметр, що передається у
+	   нестатичні методи класу. */
 }
 
 void fraction_t::set_denominator(int denominator) {
@@ -18,7 +20,7 @@ void fraction_t::set_denominator(int denominator) {
 }
 
 std::string fraction_t::to_string() {
-	return "";
+	return std::format("({}/{})", numerator, denominator);
 }
 
 /*

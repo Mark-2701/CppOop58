@@ -1,4 +1,17 @@
+#include "intro.h"
+#include <iostream>
+#include "fraction.h"
 
+void intro() {
+	// запуск демонстрації
+	std::cout << "intro  to OOP" << std::endl;
+	// створення об'єктів
+	fraction_t frac1; // статичне оголошення - змінна у стеку
+	fraction_t* frac2 = new fraction_t; // динамічне оголошення - об'єкт 
+	//у "купи"
+
+
+}
 
 /*
 ООП. Вступ.
