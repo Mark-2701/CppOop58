@@ -2,21 +2,27 @@
 #include <string>
 #include <iostream>
 
-// Оголошення класу вектора на площині
 class vector2_t {
 private:
-	double x; // координата x (дробова)
-	double y; // координата y (дробова)
+	double x;      
+	double y;       
+	char* name;     
 
 public:
-	vector2_t();                    // конструктор за замовчуванням
-	vector2_t(double x, double y);  // конструктор з параметрами
+	vector2_t();                   
+	vector2_t(double x, double y); 
+	vector2_t(double x, double y, char* name); 
+	vector2_t(const vector2_t& other);         
 
-	// Аксесори (гетери та сетери)
+	~vector2_t();
+
 	double get_x() const;
 	double get_y() const;
 	void set_x(double x);
 	void set_y(double y);
+
+	char* get_name() const;
+	void set_name(char* name);
 
 	std::string to_string() const;
 };

@@ -2,6 +2,7 @@
 #include "fraction.h"
 #include <format>
 #include <iostream>
+#include <cstring>
 
 fraction_t::fraction_t() {
 	numerator = 0;
@@ -32,8 +33,6 @@ fraction_t::fraction_t(fraction_t& other) {
 		size_t len = strlen(other.name) + 1;
 		this->name = new char[len];
 		strcpy(this->name, other.name);
-		std::cout << "Copy constructor: copy from " << (void*)other.name << " to "
-			<< (void*)(this->name) << std::endl;
 	}
 	else {
 		this->name = NULL;
@@ -45,7 +44,6 @@ fraction_t::fraction_t(fraction_t&& other) noexcept {
 	this->denominator = other.denominator;
 	this->name = other.name;
 	other.name = NULL;
-	std::cout << "Move constructor: take from " << (void*)this->name << std::endl;
 }
 
 char* fraction_t::get_name() const {
@@ -173,10 +171,30 @@ void fraction_t::reduce() {
 	}
 }
 
-// === РЕАЛІЗАЦІЯ МЕТОДІВ КЛАСУ vector2_t ===
-vector2_t::vector2_t() : x(0.0), y(0.0) {}
+vector2_t::vector2_t() : x(0.0), y(0.0), name(nullptr) {}
 
-vector2_t::vector2_t(double x, double y) : x(x), y(y) {}
+vector2_t::vector2_t(double x, double y) : x(x), y(y), name(nullptr) {}
+
+vector2_t::vector2_t(double x, double y, char* name) : x(x), y(y), name(name) {}
+
+vector2_t::vector2_t(const vector2_t& other) {
+	this->x = other.x;
+	this->y = other.y;
+	if (other.name != nullptr) {
+		size_t len = strlen(other.name) + 1;
+		this->name = new char[len];
+		strcpy_s(this->name, len, other.name);
+	}
+	else {
+		this->name = nullptr;
+	}
+}
+
+vector2_t::~vector2_t() {
+	if (name != nullptr) {
+		delete[] name;
+	}
+}
 
 double vector2_t::get_x() const {
 	return x;
@@ -194,8 +212,17 @@ void vector2_t::set_y(double y) {
 	this->y = y;
 }
 
+char* vector2_t::get_name() const {
+	return name;
+}
+
+void vector2_t::set_name(char* name) {
+	this->name = name;
+}
+
 std::string vector2_t::to_string() const {
-	return std::format("({0}, {1})", x, y);
+	std::string name_str = (name == nullptr ? "" : std::string(" ") + name);
+	return std::format("({0}, {1}{2})", x, y, name_str);
 }
 /*
 Правило опису класів (The Rule Of Six):

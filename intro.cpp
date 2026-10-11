@@ -53,19 +53,25 @@ void intro() {
 	f += frac5;
 	std::cout << f << std::endl;
 
-	// === ДЕМОНСТРАЦІЯ РОБОТИ З КЛАСОМ ВЕКТОРА (vector2_t) ===
-	std::cout << "\n--- Vector2_t Demonstration ---" << std::endl;
-	vector2_t v1;
-	vector2_t v2(3.5, -2.1);
+	std::cout << "\n=== Vector2_t Demonstration ===" << std::endl;
+
+	vector2_t v1;                                    
+	vector2_t v2(3.5, -2.1);                        
+	vector2_t v3(1.0, 4.0, new char[] {"VectorA"}); 
+	vector2_t v4(v3);
+	v4.set_name(new char[] {"VectorA_Copy"});
+	v4.set_x(7.7);
 
 	std::cout << "v1 (default): " << v1.to_string() << std::endl;
 	std::cout << "v2 (params): " << v2.to_string() << std::endl;
+	std::cout << "v3 (with name): " << v3.to_string() << std::endl;
+	std::cout << "v4 (copied & modified): " << v4.to_string() << std::endl;
 
 	v1.set_x(5.2);
 	v1.set_y(8.9);
+	v1.set_name(new char[] {"VectorB"});
 	std::cout << "v1 after setters: " << v1.to_string() << std::endl;
 	std::cout << "v2 coordinates -> x: " << v2.get_x() << ", y: " << v2.get_y() << std::endl;
-	// ========================================================
 
 	delete frac2;
 	delete frac4;
