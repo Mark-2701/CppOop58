@@ -139,13 +139,21 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="basics.cpp" />
     <ClCompile Include="CppOop58.cpp" />
     <ClCompile Include="fraction.cpp" />
     <ClCompile Include="intro.cpp" />
+    <ClCompile Include="Laptop.cpp" />
+    <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Electrical.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="basics.h" />
+    <ClInclude Include="Electrical.h" />
     <ClInclude Include="fraction.h" />
     <ClInclude Include="intro.h" />
+    <ClInclude Include="Laptop.h" />
+    <ClInclude Include="Product.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
