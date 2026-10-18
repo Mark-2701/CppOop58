@@ -3,27 +3,29 @@
 #include "fraction.h"
 
 void intro() {
+	// запуск демонстрації
 	std::cout << "Intro to OOP" << std::endl;
+	// створення об'єктів
+	fraction_t frac1;   // статичне оголошення - об'єкт у стеку
+	fraction_t* frac2 = new fraction_t;  // динамічне оголошення - об'єкт у "купі"
+	std::cout                                // без ініціалізації бачимо випадкові числа 
+		<< frac1.to_string() << std::endl    // до об'єктів звертаємось через "."
+		<< frac2->to_string() << std::endl;  // до покажчиків - через "->"
 
-	fraction_t frac1;
-	fraction_t* frac2 = new fraction_t;
-	std::cout
-		<< frac1.to_string() << std::endl
-		<< frac2->to_string() << std::endl;
-
+	// за допомогою конструкторів з параметрами можна задавати початкові значення
 	fraction_t frac3(10);
 	fraction_t* frac4 = new fraction_t(1, 10);
 	std::cout
 		<< frac3.to_string() << std::endl
 		<< frac4->to_string() << std::endl;
 
-	fraction_t frac5(1, 2, new char[] {"Half"});
-	fraction_t* frac6 = new fraction_t(frac5);
+	fraction_t frac5(1, 2, new char[] {"Half"});  // params contructor
+	fraction_t* frac6 = new fraction_t(frac5);     // copy constructor
 	std::cout
 		<< frac5.to_string() << std::endl
 		<< frac6->to_string() << std::endl;
 
-	fraction_t d = std::move(fraction_t::decil());
+	fraction_t d = std::move(fraction_t::decil());  // move constructor
 	std::cout << d.to_string() << std::endl;
 
 	std::cout
@@ -31,13 +33,14 @@ void intro() {
 		<< " = " << (frac5 + d).to_string() << std::endl;
 
 	std::cout << "-------------------------" << std::endl;
-	fraction_t f;
+	fraction_t f;   // default constructor: (0/1)
 	std::cout << f.to_string() << std::endl;
-	f = d;
+	f = d;          // copy assignment (operator =(&)): (1/10Decil)
 	std::cout << f.to_string() << std::endl;
 
 	std::cout << "-------------------------" << std::endl;
-	f = f + frac5;
+	f = f + frac5;  // Move assignment (operator =(&&)): результат додавання, що повертається
+	// оператором +, підлягає руйнуванню f = (move) <--ret--(f + f5) 
 	std::cout << f << std::endl;
 
 	f = f * frac5;
@@ -52,26 +55,6 @@ void intro() {
 	std::cout << "f += 1: " << f << std::endl;
 	f += frac5;
 	std::cout << f << std::endl;
-
-	std::cout << "\n=== Vector2_t Demonstration ===" << std::endl;
-
-	vector2_t v1;                                    
-	vector2_t v2(3.5, -2.1);                        
-	vector2_t v3(1.0, 4.0, new char[] {"VectorA"}); 
-	vector2_t v4(v3);
-	v4.set_name(new char[] {"VectorA_Copy"});
-	v4.set_x(7.7);
-
-	std::cout << "v1 (default): " << v1.to_string() << std::endl;
-	std::cout << "v2 (params): " << v2.to_string() << std::endl;
-	std::cout << "v3 (with name): " << v3.to_string() << std::endl;
-	std::cout << "v4 (copied & modified): " << v4.to_string() << std::endl;
-
-	v1.set_x(5.2);
-	v1.set_y(8.9);
-	v1.set_name(new char[] {"VectorB"});
-	std::cout << "v1 after setters: " << v1.to_string() << std::endl;
-	std::cout << "v2 coordinates -> x: " << v2.get_x() << ", y: " << v2.get_y() << std::endl;
 
 	delete frac2;
 	delete frac4;
